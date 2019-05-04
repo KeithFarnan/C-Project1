@@ -100,25 +100,31 @@ namespace Assignment7.UnitTests
         }
 
 
-        // Tests 
+        // Tests to determine if the average number of contracts per client method works correctly
         [TestMethod]
         public void CalculateAverageNumberOfContractsPerClient_ContractsAreOpen_ReturnsTrue()
         {
+            // Creating objects for Business rules, dummy CRUD Clients and Contracts 
             DummyCRUD dummyClientCrud = GetDummyClientCRUD();
             DummyCRUD dummyContractCrud = GetDummyContractCRUD();
             BusinessRules businessRulesObject = new BusinessRules(dummyClientCrud, dummyContractCrud);
 
+            // getting the value returned by the businessRules method 
             var actualResult = businessRulesObject.CalculateAverageNumberOfContractsPerClient();
             var expectedResult = 1;
+            // comparing the values to determine if they are equal which means the method works correctly
             Assert.AreEqual(expectedResult, actualResult);
         }
 
         [TestMethod]
         public void CalculateAverageContractDuration_ContractsAreOpen_ReturnsTrue()
         {
+            // Creating objects for the DummyCrud Clients and Contracts and a Business ruels object so we can call the methods in that class
             DummyCRUD dummyClientCrud = GetDummyClientCRUD();
             DummyCRUD dummyContractCrud = GetDummyContractCRUD();
             BusinessRules businessRulesObject = new BusinessRules(dummyClientCrud, dummyContractCrud);
+
+            // getting the value returned from the method and comparing it to the value that should be returned
             double actualResult = businessRulesObject.CalculateAverageContractDuration();
             double expectedResult = 18262;
             Assert.AreEqual(expectedResult, actualResult);
@@ -128,10 +134,12 @@ namespace Assignment7.UnitTests
         [TestMethod]
         public void CalculateEstimatedRemainingTimeOnContract_ContractsAreOpen_ReturnsTrue()
         {
+            // Creating objects for the DummyCrud Clients and Contracts and a Business ruels object so we can call the methods in that class
             DummyCRUD dummyClientCrud = GetDummyClientCRUD();
             DummyCRUD dummyContractCrud = GetDummyContractCRUD();
             BusinessRules businessRulesObject = new BusinessRules(dummyClientCrud, dummyContractCrud);
-
+            
+            // getting the value returned from the method and comparing it to the value that should be returned
             var actualResult = businessRulesObject.CalculateEstimatedRemainingTimeOnContract(dummyContractCrud.contracts[0].ContractId);
             var expectedResult = 18262;
             Assert.AreEqual(expectedResult, actualResult);
@@ -140,21 +148,27 @@ namespace Assignment7.UnitTests
         [TestMethod]
         public void CalculateAverageContractValuePerClient_ContractsAreOpen_ReturnsTrue()
         {
+            // Creating objects for the DummyCrud Clients and Contracts and a Business ruels object so we can call the methods in that class
             DummyCRUD dummyClientCrud = GetDummyClientCRUD();
             DummyCRUD dummyContractCrud = GetDummyContractCRUD();
             BusinessRules businessRulesObject = new BusinessRules(dummyClientCrud, dummyContractCrud);
+
+            // gettign the value by calling the method
             var actualResult = businessRulesObject.CalculateAverageContractValuePerClient();
 
+            // setting the values for the Clents
             double clientOneExpectedResult = 100;
             double clienttwoExpectedResult = 100;
             double clientthreeExpectedResult = 100;
             double clientfourexpectedResult = 100;
 
+            // getting the value retrieved from the business class method
             double clientOneActualResult = actualResult[1];
             double clienttwoActualResult = actualResult[2];
             double clientthreeActualResult = actualResult[3];
             double clientfourActualResult = actualResult[4];
             
+            // comparing the values and of the expected results and the results recieved from the methods
             Assert.AreEqual(clientOneExpectedResult, clientOneActualResult);
             Assert.AreEqual(clienttwoExpectedResult, clienttwoActualResult);
             Assert.AreEqual(clientthreeExpectedResult, clientthreeActualResult);
@@ -163,9 +177,12 @@ namespace Assignment7.UnitTests
         [TestMethod]
         public void CalculateNumberOfOpenContracts_ContractsAreOpen_ReturnsTrue()
         {
+            // Creating objects for the DummyCrud Clients and Contracts and a Business ruels object so we can call the methods in that class
             DummyCRUD dummyClientCrud = GetDummyClientCRUD();
             DummyCRUD dummyContractCrud = GetDummyContractCRUD();
             BusinessRules businessRulesObject = new BusinessRules(dummyClientCrud, dummyContractCrud);
+
+            // getting the value returned from the method and comparing it to the value that should be returned
             var actualResult = businessRulesObject.CalculateNumberOfOpenContracts();
             var expectedResult = 0;
             Assert.AreEqual(expectedResult, actualResult);
