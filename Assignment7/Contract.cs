@@ -6,13 +6,13 @@ namespace Assignment7
     {
         public int ContractId { get; set; }
         public int ClientId { get; set; }
-        // the value of the loan
+        // the value of the Contract
         public double Contract_Value { get; set; }
-        // the remaining amount that the client owes you
+        // the remaining amount that the client owes
         public double AmountOwed { get; set; }
-        // the date the loan was taken out
+        // the date the Contract was taken out
         public DateTime StartDate { get; set; }
-        // the date the loan was fully paid off. it is nullable because it may not have still be open
+        // the date the Contact was fully paid off. it is nullable because it may not have still be open
         public DateTime? EndDate { get; set; }
     }
 }

@@ -8,20 +8,25 @@ using System.Threading.Tasks;
 
 namespace Assignment7
 {
+    // Client CRUD class that implements the I Client CRUD interface
     public class ClientCRUD : IClientCRUD
     {
+        // connection string to connect to the database
         private string _connectionString;
 
+        // class constructor that takes the connection string as a parameter
         public ClientCRUD(string connectionString)
         {
             _connectionString = connectionString;
         }
 
+        // creates client in the database from the values from the client object being passed in 
         public void CreateClient(Client client)
         {
             ExecuteSql($"INSERT INTO ContractClients (Client_Name, DOB, Address) VALUES ('{client.ClientName}', '{client.DateOfBirth}', '{client.Address}')");
         }
 
+        // returns a list of all the clients in the database
         public List<Client> GetAllClients()
         {
             //this is the list we are going to return
@@ -29,27 +34,33 @@ namespace Assignment7
             return clients;
         }
 
+        // returns a Client object for the client with the Id passed in as a parameter
         public Client GetClient(int clientId)
         {
-            //there should be at max one result here!
+            //there should be at max one result here
             List<Client> clients = ExecuteReaderSql($"SELECT Client_ID, Client_Name, DOB, Address FROM ContractClients WHERE Client_ID = {clientId}");
             if (clients.Count == 1)
             {
+                // return the client
                 return clients[0];
             }
+            // return null if no client with that id exists
             else return null;
         }
 
+        // updates client taking the client object as the parameter
         public void UpdateClient(Client client)
         {
             ExecuteSql($"UPDATE ContractClients SET Client_Name = '{client.ClientName}', DOB = '{client.DateOfBirth}', Address = '{client.Address}' WHERE Client_ID = {client.ClientId}");
         }
 
+        // deletes client from the database using the client id as the parameter to identify the client in the database
         public void DeleteClient(int clientId)
         {
             ExecuteSql($"DELETE FROM ContractClients WHERE Client_ID = {clientId}");
         }
 
+        // private method in the class which takes the sql string opens the connection to the database executes the command and closes the connection
         private void ExecuteSql(string sql)
         {
             OleDbConnection connection = new OleDbConnection
@@ -57,8 +68,9 @@ namespace Assignment7
                 ConnectionString = _connectionString
             };
 
+            // opens the connection to the database
             connection.Open();
-
+            // creating new command object to allow interaction with the database
             OleDbCommand command = new OleDbCommand
             {
                 Connection = connection,
@@ -66,7 +78,7 @@ namespace Assignment7
             };
 
             command.ExecuteNonQuery();
-
+            // close the connection to the database
             connection.Close();
         }
 
@@ -103,7 +115,7 @@ namespace Assignment7
             }
             // close the connection to the database
             connection.Close();
-
+            // return clients list
             return clients;
         }
     }
