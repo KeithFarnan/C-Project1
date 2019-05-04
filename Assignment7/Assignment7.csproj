@@ -45,9 +45,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessRules.cs" />
-    <Compile Include="Client_1.cs" />
-    <Compile Include="ClientCRUD.cs" />
     <Compile Include="Client.cs" />
+    <Compile Include="ClientCRUD.cs" />
+    <Compile Include="Contract.cs" />
     <Compile Include="Interfaces\IClientCRUD.cs" />
     <Compile Include="Interfaces\IContractCRUD.cs" />
     <Compile Include="Program.cs" />
