@@ -32,7 +32,12 @@ namespace Assignment7
             double totalDuration = 0;
             foreach (var contract in contracts)
             {
-                totalDuration += Convert.ToDouble(contract.EndDate - contract.StartDate);
+                DateTime endDate = (contract.EndDate ?? DateTime.Now);
+
+                TimeSpan contractDuration = endDate - (contract.StartDate);
+
+                totalDuration += contractDuration.TotalDays;
+
             }
             double averageDuration = totalDuration / contracts.Count;
             return averageDuration;
@@ -43,32 +48,33 @@ namespace Assignment7
         {
             Contract selectedContract = _contractCRUD.GetContract(contractId);
             double remainingTimeOnContract = 0;
-
-            if (selectedContract.EndDate != null) {
-                remainingTimeOnContract = Convert.ToDouble(selectedContract.EndDate - DateTime.Now);
-            }
-            else {
-                remainingTimeOnContract = (selectedContract.Contract_Value / ( selectedContract.Contract_Value - selectedContract.AmountOwed )) * Convert.ToDouble(DateTime.Now - selectedContract.StartDate);
-            }
+            DateTime endDate = (selectedContract.EndDate ?? DateTime.Now);
+            TimeSpan contractDuration = endDate - (selectedContract.StartDate);
+            remainingTimeOnContract = contractDuration.TotalDays;
             return remainingTimeOnContract;
         }
 
-        public Dictionary<Client, double> CalculateAverageContractValuePerClient()
+        public Dictionary<int, double> CalculateAverageContractValuePerClient()
         {
             List<Client> clients = _clientCRUD.GetAllClients();
             List<Contract> contracts = _contractCRUD.GetAllContracts();
-            Dictionary<Client, double> dictionary = new Dictionary<Client, double>();
 
+            Dictionary<int, double> dictionary = new Dictionary<int, double>();
+            
             foreach (Client client in clients)
             {
                 double totalValue = 0;
+                double counter = 0;
                 foreach (Contract contract in contracts)
                 {
                     if (contract.ClientId == client.ClientId)
-                    totalValue += contract.Contract_Value;
+                    {
+                        totalValue += contract.Contract_Value;
+                        counter ++;
+                    }
                 }
-                double averageValue = totalValue / Convert.ToDouble(contracts.Count);
-                dictionary.Add(client, averageValue);
+                double averageValue = totalValue / counter;
+                dictionary.Add(client.ClientId, averageValue);
             }
             return dictionary;
         }

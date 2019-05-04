@@ -26,7 +26,6 @@ namespace Assignment7
 
             // read out all the clients from the db
             List<Client> allClientsInDb = clientCRUD.GetAllClients();
-
             int numberOfClients = allClientsInDb.Count;
             Client lastClient = allClientsInDb[numberOfClients - 1];
             Console.WriteLine($"{lastClient.ClientName} was born on {lastClient.DateOfBirth}, and lives in {lastClient.Address}.");
@@ -35,15 +34,12 @@ namespace Assignment7
             lastClient.Address = "somewhere else";
 
             //updating the db with the new address
-           clientCRUD.UpdateClient(lastClient);
+            clientCRUD.UpdateClient(lastClient);
 
+            // reading all clients in the database again
             int clientId = lastClient.ClientId;
-
-
             lastClient = clientCRUD.GetClient(clientId);
-
             Console.WriteLine($"{lastClient.ClientName} was born on {lastClient.DateOfBirth}, and now lives in {lastClient.Address}.");
-
 
             // deleting the client from the db
             clientCRUD.DeleteClient(clientId);
@@ -73,15 +69,11 @@ namespace Assignment7
 
 
 
-           lastClient = clientCRUD.GetClient(clientId);
-
-           Console.WriteLine($"{lastContract.ContractId} was started on {lastContract.StartDate} ends on {lastContract.EndDate}, and has a value of {lastContract.Contract_Value}.");
+            lastClient = clientCRUD.GetClient(clientId);
+            Console.WriteLine($"{lastContract.ContractId} was started on {lastContract.StartDate} ends on {lastContract.EndDate}, and has a value of {lastContract.Contract_Value}.");
 
            contractCRUD.DeleteContract(clientId);
-
-           
-
-            Console.ReadKey();
+           Console.ReadKey();
         }
     }
 }

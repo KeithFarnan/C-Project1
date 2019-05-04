@@ -26,7 +26,6 @@ namespace Assignment7
         {
             //this is the list we are going to return
             List<Client> clients = ExecuteReaderSql("SELECT Client_ID, Client_Name, DOB, Address FROM ContractClients");
-
             return clients;
         }
 
