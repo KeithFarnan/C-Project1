@@ -8,6 +8,8 @@ namespace Assignment7.UnitTests
     [TestClass]
     public class BusinessRulesTests
     {
+
+        // private method to create know Client and Contract data
         private DummyCRUD GetDummyClientCRUD()
         {
             DummyCRUD crud = new DummyCRUD();
@@ -97,6 +99,8 @@ namespace Assignment7.UnitTests
             return crud;
         }
 
+
+        // Tests 
         [TestMethod]
         public void CalculateAverageNumberOfContractsPerClient_ContractsAreOpen_ReturnsTrue()
         {

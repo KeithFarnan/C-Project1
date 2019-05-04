@@ -4,14 +4,14 @@ using Assignment7.Interfaces;
 
 namespace Assignment7.UnitTests
 {
-
+    // class that has the dummy CRUD data and implements the IContractCRUD and IClientCRUD interfaces
     public class DummyCRUD : IContractCRUD, IClientCRUD
     {
-
+        // creating lists to hold the contract and client objects
         public List<Contract> contracts = new List<Contract>();
-
         public List<Client> clients = new List<Client>();
 
+        // 
         public void CreateClient(Client client)
         {
             throw new NotImplementedException();
@@ -32,16 +32,19 @@ namespace Assignment7.UnitTests
             throw new NotImplementedException();
         }
 
+        // return clients list to calling method
         public List<Client> GetAllClients()
         {
             return clients;
         }
 
+        // return list of contracts to calling method
         public List<Contract> GetAllContracts()
         {
             return contracts;
         }
 
+        // returns client object that matches the id passed in as parameter
         public Client GetClient(int clientId)
         {
             foreach(Client client in clients)
@@ -54,6 +57,7 @@ namespace Assignment7.UnitTests
             return null;
         }
 
+        // returns contract object that matches the id passed in as parameter
         public Contract GetContract(int contractId)
         {
             foreach (Contract contract in contracts)
