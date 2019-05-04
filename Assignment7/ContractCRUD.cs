@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Assignment7
 {
+    // Contract CRUD that implements contract Crud interface and implements those methods
     public class ContractCRUD : IContractCRUD
     {
         private string _connectionString;

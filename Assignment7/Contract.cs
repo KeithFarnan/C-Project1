@@ -2,6 +2,7 @@
 
 namespace Assignment7
 {
+    // contract variables with getter and setter methods
     public class Contract
     {
         public int ContractId { get; set; }
