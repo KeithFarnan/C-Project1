@@ -2,6 +2,7 @@
 
 namespace Assignment7
 {
+    // variables for the client with getter and setter methods
     public class Client
     {
         public int ClientId { get; set; }
